@@ -10,7 +10,8 @@ def input_taker(entry):
     dice = dice.replace("-", " minus ")
     dice = dice.replace(".", " point ") ###
     dice = dice.replace("*", " multiply ")
-    dice = dice.replace("/", " splitup ")
+    dice = dice.replace("/", " splitup ") # this cannot be the word division, because the letter d is used to work out which parts 
+                                          # of the list are dice and which are not.                                         
     dicelist = re.sub("[^\w]", " ",  dice).split()
     print("The input. Splitting each piece to be worked on separately. ")
     print(dicelist)
