@@ -8,7 +8,12 @@ def input_taker(entry):
     dice = entry
     dice = dice.replace("+"," plus ")
     dice = dice.replace("-", " minus ")
+    dice = dice.replace(".", " point ") ###
+    dice = dice.replace("*", " multiply ")
+    dice = dice.replace("/", " splitup ")
     dicelist = re.sub("[^\w]", " ",  dice).split()
+    print("The input. Splitting each piece to be worked on separately. ")
+    print(dicelist)
 
     dice_coords = [ ] #this shows where the dice belong in the original dicelist
     space = " "
@@ -20,15 +25,18 @@ def input_taker(entry):
         for w in dicelist:
             if letters & set(w):
                 dice_location = dicelist.index(w)
-                #print(w + " "+ str(dice_location))
+                print(w + " "+ str(dice_location))
                 dicelist[dice_location] = space
                 dice_coords.append(w)
                 dice_coords.append(dice_location)
                 b += 1
-                #print(dice_coords)
+                print(dice_coords)
 
     the_dice_var = dice_coords[0::2]
     the_location_var = dice_coords[1::2]
+    print("Location of dice and what dice need to be rolled:")
+    print(the_location_var)
+    print(the_dice_var)
 
     quantity_1 = 0
     dice_post_while = [ ]
@@ -36,7 +44,7 @@ def input_taker(entry):
         the_dice_var_while = the_dice_var[quantity_1].split("d")
         quantity_1 += 1
         dice_post_while.append(the_dice_var_while)
-    #print(dice_post_while)
+    print(dice_post_while)
 
     quantity_2 = 0
     times_to_roll = [ ]
@@ -47,7 +55,10 @@ def input_taker(entry):
         quantity_2 += 1
         times_to_roll.append(times_to_roll_while)
         dice_type.append(dice_type_while)
-
+    print("Number of times the dice need to rolled and what type they are.")
+    print(times_to_roll)
+    print(dice_type)
+    print("The generated dice:")
     roll_entry = 0
     master_dice_numbers = []
     j = 1
@@ -67,7 +78,10 @@ def input_taker(entry):
                 dice_total += roll
                 x += 1
                 dice_numbers.append(dice_total)
-        #print(dice_numbers)
+        print(dice_numbers)
+    print("Master list for the now generated dice numbers. These will use the above location_var to put them back into"
+          " their original place")
+    print(master_dice_numbers)
 
     x = 1
     e = 0
@@ -88,14 +102,20 @@ def input_taker(entry):
         dicelist[Q] = ("("+dice_string+")")
         x += 1
         a += 1
-    #print(dicelist)
+    print("The original entry list, now with all of the generated numbers. Just needs to be put back together.")
+    print(dicelist)
 
     dicelist = "".join(dicelist)
 
     sum_of_dice = dicelist.replace("plus", "+")
     sum_of_dice = sum_of_dice.replace("minus", "-")
+    sum_of_dice = sum_of_dice.replace("point", ".") ###
+    sum_of_dice = sum_of_dice.replace("multiply", "*")
+    sum_of_dice = sum_of_dice.replace("splitup", "/")
+    print("The finished article.")
     print(sum_of_dice)
     dicelist = eval(sum_of_dice)
+    print("The sum.")
     print(dicelist)
 
 input_taker(input("What dice? "))
